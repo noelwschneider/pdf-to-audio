@@ -9,5 +9,6 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "pdfjs-dist": "^4.8.69"
   }
 }
