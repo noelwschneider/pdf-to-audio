@@ -1,7 +1,9 @@
 import { getPdfDocument } from "./util/pdf.js";
+import { speakText } from "./util/tts.js";
 
+
+// upload PDF
 let pdfDocument;
-
 document.getElementById('pdfInput').addEventListener('change', async (event) => {
   const file = event.target.files[0];
   if (!file) {
@@ -35,26 +37,4 @@ const populateVoices = () => {
 };
 speechSynthesis.addEventListener('voiceschanged', populateVoices);
 
-// tts functionality
-function speakText() {
-  const textInput = document.getElementById('textInput').value;
-  const selectedVoiceIndex = voiceSelect.value;
-
-  if (!textInput.trim()) {
-    alert("Please enter some text to speak.");
-    return;
-  }
-
-  if ('speechSynthesis' in window) {
-    const utterance = new SpeechSynthesisUtterance(textInput);
-
-    if (selectedVoiceIndex && voices[selectedVoiceIndex]) {
-      utterance.voice = voices[selectedVoiceIndex];
-    }
-
-    speechSynthesis.speak(utterance);
-  } else {
-    alert("Sorry, your browser does not support text-to-speech!");
-  }
-}
 document.getElementById('speakButton').addEventListener('click', speakText);
